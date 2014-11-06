@@ -6,8 +6,7 @@ Easy Service Discovery on Local Networks. This Cordova plugin discovers services
 ## Features
 * 100% complete: no extra dependencies
 * allows for transmitting extra, arbitrary service information
-* includes examples
-* also [available](https://github.com/willemmulder/Diont) for [Nodejs](http://nodejs.org)
+* operates smoothly with [Diont for Nodejs](https://github.com/willemmulder/Diont)
 
 ## Thanks
 Thanks to Gramakri for his [Cordova Datagram plugin](https://github.com/gramakri/cordova-plugin-datagram) that served as the inspiration for this plugin.

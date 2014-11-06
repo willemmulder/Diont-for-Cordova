@@ -2,11 +2,12 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="net.willemmulder.diont.cordova"
-	version="0.9.1">
+	version="0.9.3">
 
 	<name>Diont for Cordova</name>
 	<description>Easy Service Discovery on Local Networks</description>
 	<author>Willem Mulder</author>
+	<repo>https://github.com/willemmulder/Diont-for-Cordova</repo>
 	<license>ISC</license>
 	<keywords>udp, multicast, service, discovery, mdns, bonjour, diont, local, network, wifi</keywords>
 
