@@ -26,7 +26,7 @@ module.exports = function(options){
 	function initCallbackSuccess() {
 		queryForServices();
 	}
-	exec(initCallback, null, 'Diont', 'init', [ instanceId, host, port ]);
+	exec(initCallbackSuccess, null, 'Diont', 'init', [ instanceId, host, port ]);
 
 
 	function messageCallback(message) {
