@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	id="net.willemmulder.diont.cordova"
+	version="0.9.0">
+
+	<name>Diont for Cordova</name>
+	<description>Easy Service Discovery on Local Networks</description>
+	<author>Willem Mulder</author>
+	<license>ISC</license>
+	<keywords>udp, multicast, service, discovery, mdns, bonjour, diont, local, network, wifi</keywords>
+
+	<js-module src="www/diont.js" name="diont">
+		<clobbers target="Diont"/>
+	</js-module>
+
+	<platform name="android">
+		<!-- inject <feature> tag into config.xml to register the plugin -->
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Diont" >
+				<param name="android-package" value="net.willemmulder.diont.cordova"/>
+			</feature>
+		</config-file>
+		<source-file src="src/android/Diont.java" target-dir="src/net/willemmulder/diont/cordova/" />
+	</platform>
+
+</plugin>
+
