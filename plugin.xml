@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="net.willemmulder.diont.cordova"
-	version="0.9.5">
+	version="0.9.6">
 
 	<name>Diont for Cordova</name>
 	<description>Easy Service Discovery on Local Networks</description>
@@ -19,7 +19,7 @@
 		<!-- inject <feature> tag into config.xml to register the plugin -->
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Diont" >
-				<param name="android-package" value="net.willemmulder.diont.cordova"/>
+				<param name="android-package" value="net.willemmulder.diont.cordova.Diont"/>
 			</feature>
 		</config-file>
 		<source-file src="src/android/Diont.java" target-dir="src/net/willemmulder/diont/cordova/" />
