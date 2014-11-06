@@ -91,9 +91,11 @@ public class Diont extends CordovaPlugin {
 
         MulticastSocket socket;
         PluginResult result;
+        CallbackContext callbackContext;
 
-        public SocketListener(MulticastSocket socket, CallbackContext callbackContext) {
+        public SocketListener(MulticastSocket socket, CallbackContext callbackContextParam) {
             this.socket = socket;
+            callbackContext = callbackContextParam;
         }
 
         public void run() {
