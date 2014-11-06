@@ -3,7 +3,7 @@ var exec = cordova.require('cordova/exec');
 var MULTICAST_HOST = "224.0.0.236";
 var MULTICAST_PORT = 80;
 
-module.exports = function(options){
+module.exports = function(options) {
 
 	var instanceId = guid();
 
@@ -86,7 +86,7 @@ module.exports = function(options){
 		} catch(e) {
 			// ignore...
 		}
-	});
+	}
 	exec(messageCallback, null, 'Diont', 'listen', [ instanceId ]);
 
 	// =====
