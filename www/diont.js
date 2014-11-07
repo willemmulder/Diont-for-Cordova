@@ -1,7 +1,7 @@
 var exec = cordova.require('cordova/exec');
 
 var MULTICAST_HOST = "224.0.0.236";
-var MULTICAST_PORT = 80;
+var MULTICAST_PORT = 60540;
 
 module.exports = function(options) {
 
