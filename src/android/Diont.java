@@ -12,22 +12,22 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.util.SparseArray;
+import java.util.HashMap;
 
 public class Diont extends CordovaPlugin {
 
-    SparseArray<MulticastSocket> sockets;
-    SparseArray<SocketListener> listeners;
+    HashMap<String, MulticastSocket> sockets;
+    HashMap<String, SocketListener> listeners;
 
     public Diont() {
-        sockets = new SparseArray<MulticastSocket>();
-        listeners = new SparseArray<SocketListener>();
+        sockets = new HashMap<String, MulticastSocket>();
+        listeners = new HashMap<String, SocketListener>();
     }
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         
-        final int instanceId = data.getInt(0);
+        final String instanceId = data.getString(0);
         MulticastSocket socket = sockets.get(instanceId);
 
         if (action.equals("init")) {
@@ -37,11 +37,11 @@ public class Diont extends CordovaPlugin {
                     int port = data.getInt(2);
 
                     socket = new MulticastSocket(port);
-                    socket.setTimeToLive(1); // Local network
+                    socket.setTimeToLive(10); // Local network
                     socket.joinGroup(InetAddress.getByName(host)); // Tell the OS to listen for messages on the specified host and treat them as if they were meant for this host
                     Boolean disableLoopback = false;
                     socket.setLoopbackMode(disableLoopback);
-
+                    
                     sockets.put(instanceId, socket);
                     callbackContext.success();
                 } catch (Exception e) {
@@ -54,6 +54,8 @@ public class Diont extends CordovaPlugin {
                 SocketListener listener = new SocketListener(socket, callbackContext);
                 listeners.put(instanceId, listener);
                 listener.start();
+                // Don't run callbackContext.success() since that 'closes' the callbackcontext
+                // Such that is prevents us to send further .success(PluginResult.Status.OK) messages when the listener receives a message
             } catch (Exception e) {
                 callbackContext.error(e.toString());
             }
@@ -66,9 +68,11 @@ public class Diont extends CordovaPlugin {
                 byte[] bytes = message.getBytes("UTF-8");
                 DatagramPacket packet = new DatagramPacket(bytes, bytes.length, InetAddress.getByName(host), port);
                 socket.send(packet);
-                callbackContext.success(message);
+                callbackContext.success(InetAddress.getByName(host).getHostAddress() + ":" + message);
             } catch (IOException ioe) {
                 callbackContext.error("IOException: " + ioe.toString());
+            } catch (Exception e) {
+                callbackContext.error("Exception: " + e.toString());
             }
         } else if (action.equals("close")) {
             if (socket != null) {

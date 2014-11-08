@@ -26,7 +26,10 @@ module.exports = function(options) {
 	function initCallbackSuccess() {
 		queryForServices();
 	}
-	exec(initCallbackSuccess, null, 'Diont', 'init', [ instanceId, host, port ]);
+	function initCallbackFail(err) {
+		// ...
+	}
+	exec(initCallbackSuccess, initCallbackFail, 'Diont', 'init', [ instanceId, host, port ]);
 
 
 	function messageCallback(message) {
@@ -150,6 +153,14 @@ module.exports = function(options) {
 	// Helper functions
 	// =====
 
+	function generalSuccessCallback(success) {
+		// ...
+	}
+
+	function generalFailCallback(error) {
+		// ...
+	}
+
 	function sendAnnouncement(serviceInfo) {
 		var serviceInfosToAnnounce = [];
 		if (serviceInfo instanceof Array) {
@@ -163,7 +174,7 @@ module.exports = function(options) {
 			serviceInfos: serviceInfosToAnnounce
 		}
 		var message = JSON.stringify(messageObject);
-		exec(null, null, 'Diont', 'send', [ instanceId, message, host, port ]);
+		exec(generalSuccessCallback, generalFailCallback, 'Diont', 'send', [ instanceId, message, host, port ]);
 	}
 
 	function sendRenouncement(serviceInfo) {
@@ -179,7 +190,7 @@ module.exports = function(options) {
 			serviceInfos: serviceInfosToRenounce
 		}
 		var message = JSON.stringify(messageObject);
-		exec(null, null, 'Diont', 'send', [ instanceId, message, host, port ]);
+		exec(generalSuccessCallback, generalFailCallback, 'Diont', 'send', [ instanceId, message, host, port ]);
 	}
 
 	function queryForServices() {
@@ -188,7 +199,7 @@ module.exports = function(options) {
 			fromDiontInstance: instanceId
 		}
 		var message = JSON.stringify(messageObject);
-		exec(null, null, 'Diont', 'send', [ instanceId, message, host, port ]);
+		exec(generalSuccessCallback, generalFailCallback, 'Diont', 'send', [ instanceId, message, host, port ]);
 	}
 
 	function guid() {
