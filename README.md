@@ -8,6 +8,14 @@ Easy Service Discovery on Local Networks. This Cordova plugin discovers services
 * allows for transmitting extra, arbitrary service information
 * operates smoothly with [Diont for Nodejs](https://github.com/willemmulder/Diont)
 
+## Installation
+Install the plugin with cordova using this command
+
+```shell
+cordova plugin add "https://github.com/willemmulder/Diont-for-Cordova.git"
+```
+or install via [Plugman](https://github.com/apache/cordova-plugman/) and search for Diont.
+
 ## Thanks
 Thanks to Gramakri for his [Cordova Datagram plugin](https://github.com/gramakri/cordova-plugin-datagram) that served as the inspiration for the UDP parts of this plugin.
 
