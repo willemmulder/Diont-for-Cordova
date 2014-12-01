@@ -16,8 +16,7 @@ cordova plugin add "https://github.com/willemmulder/Diont-for-Cordova.git"
 ```
 or install via [Plugman](https://github.com/apache/cordova-plugman/) and search for Diont.
 
-## Thanks
-Thanks to Gramakri for his [Cordova Datagram plugin](https://github.com/gramakri/cordova-plugin-datagram) that served as the inspiration for the UDP parts of this plugin.
+The Diont plugin will be available as the `Diont` global variable in your Javascript code. See 'Get started' for an example.
 
 ## Get started
 ```javascript
@@ -57,3 +56,6 @@ setTimeout(function() {
 	diont.renounceService(service);
 }, 5000);
 ```
+
+## Thanks
+Thanks to Gramakri for his [Cordova Datagram plugin](https://github.com/gramakri/cordova-plugin-datagram) that served as the inspiration for the UDP parts of this plugin.
