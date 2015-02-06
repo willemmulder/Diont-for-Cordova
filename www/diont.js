@@ -96,22 +96,63 @@ module.exports = function(options) {
 	// Exported functions
 	// =====
 
-	exports.announceService = function(service) {
-		if (!service.host) {
-			service.host = getNetworkIPAddress();
-		}
-		if (!service.host || !service.port || !service.name) {
-			return false;
-		}
-		var id = service.host + ":" + service.port + ":" + service.name;
-		if(!serviceInfos[id]) {
-			var serviceInfo = serviceInfos[id] = {
-				isOurService: true,
-				service: service
-			}
-			sendAnnouncement(serviceInfo);
-		}
-	}
+    exports.announceService = function(service) {
+        if (!service.host) {
+            /* Many thanks to the following shoulders:
+				http://net.ipcalf.com/
+				http://stackoverflow.com/questions/2138538/non-server-side-method-of-getting-local-ip-address-in-browser
+			*/
+            // NOTE: window.RTCPeerConnection is "not a constructor" in FF22/23
+            var RTCPeerConnection = /*window.RTCPeerConnection ||*/
+                window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+
+            var rtc;
+
+            if (RTCPeerConnection) {
+
+                rtc = new RTCPeerConnection({
+                    iceServers: []
+                });
+                if (1 || window.mozRTCPeerConnection) { // FF [and now Chrome!] needs a channel/stream to proceed
+                    rtc.createDataChannel('', {
+                        reliable: false
+                    });
+                }
+                rtc.onicecandidate = function(evt) {
+                    if (evt.candidate) {
+                        if (!service.host) {
+                            service.host = getIpFromString(evt.candidate.candidate);
+                        }
+                        if (!service.host || !service.port || !service.name) {
+                            return false;
+                        }
+                        var id = service.host + ":" + service.port + ":" + service.name;
+                        if (!serviceInfos[id]) {
+                            var serviceInfo = serviceInfos[id] = {
+                                isOurService: true,
+                                service: service
+                            }
+                            sendAnnouncement(serviceInfo);
+                        }
+                    }
+                };
+
+                rtc.createOffer(function(offerDesc) {
+                    rtc.setLocalDescription(offerDesc);
+                }, function(e) {
+                    console.warn("offer failed", e);
+                });
+            } else {
+                //browser doesn't support webrtc   
+            }
+
+            function getIpFromString(a) {
+                var r = a.match(/\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/);
+                return r[0];
+            }
+        }
+    }
+
 
 	exports.renounceService = function(service) {
 		if (!service.host || !service.port || !service.name) {
