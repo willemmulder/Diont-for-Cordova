@@ -98,7 +98,11 @@ module.exports = function(options) {
 
 	exports.announceService = function(service) {
 		if (!service.host) {
-			service.host = getNetworkIPAddress();
+		        chrome.system.network.getNetworkInterfaces(function(networkInterfaces) {
+	                	var eth1 = networkInterfaces[1],
+		                        address = eth1.address;
+		                service.host = address;
+		        });
 		}
 		if (!service.host || !service.port || !service.name) {
 			return false;
