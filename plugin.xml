@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="net.willemmulder.diont.cordova"
-	version="0.9.9">
+	version="0.9.10">
 
 	<name>Diont for Cordova</name>
 	<description>Easy Service Discovery on Local Networks</description>
