@@ -15,7 +15,7 @@
 		<clobbers target="Diont"/>
 	</js-module>
 
-	<dependency id="org.chromium.system.network" url="https://github.com/MobileChromeApps/cordova-plugin-chrome-apps-system-network" commit="master" />
+	<dependency id="cordova-plugin-chrome-apps-system-network" url="https://github.com/MobileChromeApps/cordova-plugin-chrome-apps-system-network" commit="master" />
 	
 	<platform name="android">
 		<!-- inject <feature> tag into config.xml to register the plugin -->
