@@ -1,0 +1,35 @@
+{
+  "name": "cordova-plugin-diont",
+  "version": "0.9.11",
+  "description": "Easy Service Discovery on Local Networks",
+  "cordova": {
+    "id": "cordova-plugin-diont",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willemmulder/Diont-for-Cordova.git"
+  },
+  "keywords": [
+    "udp",
+    "multicast",
+    "service",
+    "discovery",
+    "mdns",
+    "bonjour",
+    "diont",
+    "local",
+    "network",
+    "wifi",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Willem Mulder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willemmulder/Diont-for-Cordova/issues"
+  },
+  "homepage": "https://github.com/willemmulder/Diont-for-Cordova#readme"
+}
