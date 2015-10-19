@@ -20,6 +20,7 @@ The Diont plugin will be available as the `Diont` global variable in your Javasc
 
 ## Get started
 ```javascript
+// Cordova standard - run once Cordova and the device is ready
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
