@@ -20,41 +20,48 @@ The Diont plugin will be available as the `Diont` global variable in your Javasc
 
 ## Get started
 ```javascript
-var diont = Diont();
+document.addEventListener("deviceready", onDeviceReady, false);
 
-// ======
-// Listen for announcements and renouncements in services
-// ======
-diont.on("serviceAnnounced", function(serviceInfo) {
-	// A service was announced
-	// This function triggers for services not yet available in diont.getServiceInfos()
-	// serviceInfo is an Object { isOurService : Boolean, service: Object }
-	// service.name, service.host and service.port are always filled
-	console.log("A new service was announced", serviceInfo.service);
-	// List currently known services
-	console.log("All known services", diont.getServiceInfos());
-});
+function onDeviceReady() {
 
-diont.on("serviceRenounced", function(serviceInfo) {
-	console.log("A service was renounced", serviceInfo.service);
-	console.log("All known services", diont.getServiceInfos());
-});
+	var diont = Diont();
+	
+	// ======
+	// Listen for announcements and renouncements in services
+	// ======
+	diont.on("serviceAnnounced", function(serviceInfo) {
+		// A service was announced
+		// This function triggers for services not yet available in diont.getServiceInfos()
+		// serviceInfo is an Object { isOurService : Boolean, service: Object }
+		// service.name, service.host and service.port are always filled
+		console.log("A new service was announced", serviceInfo.service);
+		// List currently known services
+		console.log("All known services", diont.getServiceInfos());
+	});
+	
+	diont.on("serviceRenounced", function(serviceInfo) {
+		console.log("A service was renounced", serviceInfo.service);
+		console.log("All known services", diont.getServiceInfos());
+	});
+	
+	// ======
+	// Announce our own service
+	// ======
+	var service = {
+		name: "TestServer 1",
+		host: "127.0.0.1", // when omitted, defaults to the local IP
+		port: "1231"
+		// any additional information is allowed and will be propagated
+	};
+	diont.announceService(service);
+	
+	// Renounce after 5 seconds
+	setTimeout(function() {
+		diont.renounceService(service);
+	}, 5000);
 
-// ======
-// Announce our own service
-// ======
-var service = {
-	name: "TestServer 1",
-	host: "127.0.0.1", // when omitted, defaults to the local IP
-	port: "1231"
-	// any additional information is allowed and will be propagated
-};
-diont.announceService(service);
+}
 
-// Renounce after 5 seconds
-setTimeout(function() {
-	diont.renounceService(service);
-}, 5000);
 ```
 
 ## Thanks
